@@ -9,8 +9,6 @@ Make sure you have set the following environment variables
 
 Then call certbot or certbot-auto
 
-.. code-block:: bash
-
     certbot-auto \
       -d *.srf.ch \
       --server https://acme-v02.api.letsencrypt.org/directory \
