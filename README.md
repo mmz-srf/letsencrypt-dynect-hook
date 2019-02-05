@@ -1,5 +1,19 @@
+Prerequisites
+=============
+
+You need python3 and the argparse and dynect modules
+- pip3 install dynect
+- pip3 install argparse
+
+If you are having issues to install dynect, install it from source
+
+    git clone https://github.com/dyninc/Dynect-API-Python-Library.git
+    cd Dynect-API-Python-Library
+    python3 setup.py install
+
+
 Usage
-========
+=====
 
 Make sure you have set the following environment variables
 - export CERTBOT_CUSTOMER_NAME=your-dynect-customer-name
