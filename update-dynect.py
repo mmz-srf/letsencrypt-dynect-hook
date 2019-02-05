@@ -36,6 +36,16 @@ class LetsencryptDynectUpdater (object):
 			sys.exit(1)
 
 	def deleteValidationRecord(self):
+		response = self.rest_client.execute('/TXTRecord/{}/{}/'.format(self.domain, self.fqdn), 'DELETE')
+		if response['status'] != 'success':
+			print('Failed to delete txt entries')
+			sys.exit(1)
+
+		records = response['data']
+		for record in records:
+			record_id = record.split('/').pop()
+			print(record_id)
+			print(record)
 		return True
 
 	def addValidationRecord(self):
