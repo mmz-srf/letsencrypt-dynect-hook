@@ -2,7 +2,7 @@ Prerequisites
 =============
 
 You need python3 and the argparse and dynect modules
-- pip3 install dynect
+- pip3 install DynectDNS
 - pip3 install argparse
 
 If you are having issues to install dynect, install it from source
