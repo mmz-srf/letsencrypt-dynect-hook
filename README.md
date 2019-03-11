@@ -1,9 +1,10 @@
 Prerequisites
 =============
 
-You need python3 and the argparse and dynect modules
+You need python3 and the argparse, dotenv and dynect modules
 - pip3 install DynectDNS
 - pip3 install argparse
+- pip3 install python-dotenv
 
 If you are having issues to install dynect, install it from source
 
