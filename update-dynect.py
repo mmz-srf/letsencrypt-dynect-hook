@@ -6,6 +6,9 @@ import argparse
 
 from dynect.DynectDNS import DynectRest
 
+from pprint import pprint
+pprint(os.environ)
+sys.exit(1)
 
 class LetsencryptDynectUpdater (object):
 
@@ -96,10 +99,6 @@ parser.add_argument(
     type=str
 )
 arguments = parser.parse_args()
-
-from pprint import pprint
-pprint(os.environ)
-sys.exit(1)
 
 # update
 updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
