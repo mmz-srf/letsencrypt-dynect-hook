@@ -3,6 +3,8 @@
 import sys
 import os
 import argparse
+from dotenv import load_dotenv
+load_dotenv()
 
 from dynect.DynectDNS import DynectRest
 
