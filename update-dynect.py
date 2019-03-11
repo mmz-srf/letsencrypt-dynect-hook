@@ -7,6 +7,8 @@ import argparse
 from dynect.DynectDNS import DynectRest
 
 from pprint import pprint
+print('here it comes')
+print(os.environ['CERTBOT_CUSTOMER_NAME'])
 pprint(os.environ)
 sys.exit(1)
 
