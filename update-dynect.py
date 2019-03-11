@@ -101,8 +101,13 @@ arguments = parser.parse_args()
 
 # update
 updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
+print("Login to dynect api")
 updater.login()
+print("Delete existing txt record if any")
 updater.deleteValidationRecord()
+print("Add new validation as txt record")
 updater.addValidationRecord()
+print("Publish modified records")
 updater.publish()
+print("Logout again")
 updater.logout()
