@@ -97,6 +97,9 @@ parser.add_argument(
 )
 arguments = parser.parse_args()
 
+from pprint import pprint
+pprint(os.environ)
+
 # update
 updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
 updater.login()
