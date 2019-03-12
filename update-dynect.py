@@ -45,8 +45,8 @@ class LetsencryptDynectUpdater (object):
             ), 'DELETE'
         )
         if response['status'] != 'success':
-            print('Failed to delete txt entries')
-            sys.exit(1)
+            print('No entries found to delete')
+            return True
 
         records = response['data']
         for record in records:
