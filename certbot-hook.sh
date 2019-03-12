@@ -10,6 +10,6 @@ fi
 source /etc/environment
 
 /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN $CERTBOT_VALIDATION
-echo "Now waiting for 10 seconds"
-sleep 10
+echo "Now waiting for 60 seconds"
+sleep 60
 exit $?
