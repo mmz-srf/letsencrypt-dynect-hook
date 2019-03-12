@@ -23,6 +23,10 @@ class LetsencryptDynectUpdater (object):
     def __init__(self, domain, validation):
         self.domain = domain
         self.validation = validation
+        print('Domain:')
+        print(self.domain)
+        print('Validation:')
+        print(self.validation)
         self.fqdn = '{}.{}'.format(self.challengeSubdomain, self.domain)
 
     def login(self):
