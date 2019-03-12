@@ -14,7 +14,7 @@ class LetsencryptDynectUpdater (object):
     customer_name = os.environ['CERTBOT_CUSTOMER_NAME']
     api_key = os.environ['CERTBOT_API_KEY']
     api_pass = os.environ['CERTBOT_API_PASS']
-    challengeSubdomain = '_acme_challenge'
+    challengeSubdomain = '_acme-challenge'
     rest_client = DynectRest()
     fqdn = None
     domain = None
@@ -23,10 +23,6 @@ class LetsencryptDynectUpdater (object):
     def __init__(self, domain, validation):
         self.domain = domain
         self.validation = validation
-        print('Domain:')
-        print(self.domain)
-        print('Validation:')
-        print(self.validation)
         self.fqdn = '{}.{}'.format(self.challengeSubdomain, self.domain)
 
     def login(self):
