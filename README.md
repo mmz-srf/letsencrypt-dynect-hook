@@ -16,10 +16,10 @@ If you are having issues to install dynect, install it from source
 Usage
 =====
 
-Make sure you have set the following environment variables
-- export CERTBOT_CUSTOMER_NAME=your-dynect-customer-name
-- export CERTBOT_API_KEY=your-api-key
-- export CERTBOT_API_PASS=your-api-password
+Make sure you have set the following environment variables in a .env file in the same directory as these scripts.
+- CERTBOT_CUSTOMER_NAME=your-dynect-customer-name
+- CERTBOT_API_KEY=your-api-key
+- CERTBOT_API_PASS=your-api-password
 
 
 Then call certbot or certbot-auto
