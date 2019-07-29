@@ -3,8 +3,8 @@
 import sys
 import os
 import argparse
-from dotenv import load_dotenv
-load_dotenv()
+from dotenv import Dotenv
+Dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 from dynect.DynectDNS import DynectRest
 
