@@ -10,6 +10,7 @@ fi
 
 # load env variables since they are not available in a dynect hook by default
 source /etc/environment
+cat /etc/environment
 printenv
 exit 1
 
