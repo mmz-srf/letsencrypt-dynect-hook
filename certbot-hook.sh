@@ -1,5 +1,8 @@
 #!/bin/bash
 
+printenv
+exit 1
+
 if [ -z "$CERTBOT_DOMAIN" ] || [ -z "$CERTBOT_VALIDATION" ]
 then
     echo "EMPTY DOMAIN OR VALIDATION"
