@@ -8,6 +8,8 @@ then
     exit 1
 fi
 
+echo "/usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN $CERTBOT_VALIDATION"
+
 /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN $CERTBOT_VALIDATION
 EXIT_CODE=$?
 exit $EXIT_CODE
