@@ -1,7 +1,6 @@
 #!/bin/bash
 
-printenv
-exit 1
+
 
 if [ -z "$CERTBOT_DOMAIN" ] || [ -z "$CERTBOT_VALIDATION" ]
 then
@@ -11,6 +10,9 @@ fi
 
 # load env variables since they are not available in a dynect hook by default
 source /etc/environment
+printenv
+exit 1
+
 
 /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN $CERTBOT_VALIDATION
 EXIT_CODE=$?
