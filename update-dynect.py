@@ -23,9 +23,15 @@ class LetsencryptDynectUpdater (object):
     validation = None
 
     def __init__(self, domain, validation):
-        self.domain = domain
+        self.domain = self.parseTld(domain)
+
         self.validation = validation
-        self.fqdn = '{}.{}'.format(self.challengeSubdomain, self.domain)
+        # use the passed domain param here, self.domain only contains the main domain at this point
+        self.fqdn = '{}.{}'.format(self.challengeSubdomain, domain)
+
+    def parseTld(self, domain):
+        splitted = domain.split('.')
+        return '.'.join(splitted[-2:])
 
     def login(self):
         arguments = {
