@@ -3,6 +3,7 @@
 import sys
 import os
 import argparse
+import time
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -119,3 +120,5 @@ print("Publish modified records")
 updater.publish()
 print("Logout again")
 updater.logout()
+print("Wait 10s")
+time.sleep(5)
