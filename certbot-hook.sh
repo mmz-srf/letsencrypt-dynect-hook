@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 function authDynect() {
     /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
@@ -37,7 +37,7 @@ fi
 CERTBOT_DOMAIN_CLEAN=$(echo -n $CERTBOT_DOMAIN|sed 's/^\*\.//g')
 
 
-soure .env
+source .env
 
 HANDLER=$1;
 if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]; then
