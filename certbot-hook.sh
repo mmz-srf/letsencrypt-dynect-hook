@@ -18,6 +18,8 @@ function auth() {
     exitCodeDynect=$?
     authNsone
     exitCodeNsone=$?
+
+    sleep 30
 }
 
 cleanupDynect() {
