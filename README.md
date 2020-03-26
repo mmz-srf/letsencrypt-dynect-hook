@@ -34,4 +34,9 @@ Then call certbot or certbot-auto
       --manual-auth-hook "/tmp/dynect-test/certbot-hook.sh auth" \
       --manual-cleanup-hook "/tmp/dynect-test/certbot-hook.sh cleanup" \
       --manual-public-ip-logging-ok \
-      --preferred-challenges dns certonly
+      --preferred-challenges dns \
+      certonly
+
+
+dig _acme-challenge.bibersch.10vor10.ch TXT @ns1.p23.dynect.net
+dig _acme-challenge.bibersch.10vor10.ch TXT @dns1.p07.nsone.net

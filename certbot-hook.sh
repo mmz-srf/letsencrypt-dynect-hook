@@ -22,12 +22,6 @@ function auth() {
     sleep 60
 }
 
-cleanupDynect() {
-    echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
-    /usr/bin/python3 $(pwd)/update-dynect.py "cleanup" $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
-    return $?
-}
-
 cleanupNsone() {
     echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
 	lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
@@ -36,8 +30,6 @@ cleanupNsone() {
 }
 
 function cleanup() {
-	cleanupDynect
-    exitCodeDynect=$?
 	cleanupNsone
     exitCodeNsone=$?
 }
