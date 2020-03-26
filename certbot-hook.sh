@@ -37,7 +37,7 @@ fi
 CERTBOT_DOMAIN_CLEAN=$(echo -n $CERTBOT_DOMAIN|sed 's/^\*\.//g')
 
 
-#soure .env
+soure .env
 
 HANDLER=$1;
 if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]; then
