@@ -19,12 +19,12 @@ function auth() {
     authNsone
     exitCodeNsone=$?
 
-    sleep 30
+    sleep 60
 }
 
 cleanupDynect() {
     echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
-    /usr/bin/python3 $(pwd)/update-dynect.py "cleanup" $CERTBOT_DOMAIN_CLEAN
+    /usr/bin/python3 $(pwd)/update-dynect.py "cleanup" $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
     return $?
 }
 
