@@ -6,7 +6,6 @@ function authDynect() {
     return $?
 }
 
-
 function authNsone() {
     echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
     lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
@@ -14,16 +13,12 @@ function authNsone() {
     return $?
 }
 
-
-
 function auth() {
     authDynect
     exitCodeDynect=$?
     authNsone
     exitCodeNsone=$?
-
 }
-
 
 cleanupDynect() {
     echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
@@ -54,7 +49,6 @@ fi
 
 # remove *. from domain if present
 CERTBOT_DOMAIN_CLEAN=$(echo -n $CERTBOT_DOMAIN|sed 's/^\*\.//g')
-
 
 source .env
 
