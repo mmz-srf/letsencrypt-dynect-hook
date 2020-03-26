@@ -23,7 +23,7 @@ function auth() {
 }
 
 function cleanup() {
-
+    return 0
 }
 
 
