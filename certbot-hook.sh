@@ -7,7 +7,7 @@ function authDynect() {
 
 
 function authNsone() {
-    echo lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
+    lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
     create "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
     return $?
 }
