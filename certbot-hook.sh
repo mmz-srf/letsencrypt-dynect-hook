@@ -1,12 +1,14 @@
 #!/bin/bash
 
 function authDynect() {
-    /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
+	echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
+    /usr/bin/python3 $(pwd)/update-dynect.py "auth" $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
     return $?
 }
 
 
 function authNsone() {
+    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
     lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
     create "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
     return $?
@@ -22,8 +24,25 @@ function auth() {
 
 }
 
+
+cleanupDynect() {
+    echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
+    /usr/bin/python3 $(pwd)/update-dynect.py "cleanup" $CERTBOT_DOMAIN_CLEAN
+    return $?
+}
+
+cleanupNsone() {
+    echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
+	lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
+    delete "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
+    return $?
+}
+
 function cleanup() {
-    return 0
+	cleanupDynect
+    exitCodeDynect=$?
+	cleanupNsone
+    exitCodeNsone=$?
 }
 
 

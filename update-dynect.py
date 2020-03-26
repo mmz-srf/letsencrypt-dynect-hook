@@ -23,7 +23,7 @@ class LetsencryptDynectUpdater (object):
     domain = None
     validation = None
 
-    def __init__(self, domain, validation):
+    def __init__(self, domain, validation=None):
         self.domain = self.parseTld(domain)
 
         self.validation = validation
@@ -97,6 +97,11 @@ class LetsencryptDynectUpdater (object):
 # arguments
 parser = argparse.ArgumentParser()
 parser.add_argument(
+    "command",
+    help="Command to execute",
+    type=str
+)
+parser.add_argument(
     "domain",
     help="Domain to update.",
     type=str
@@ -108,15 +113,25 @@ parser.add_argument(
 )
 arguments = parser.parse_args()
 
-# update
-updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
-print("Login to dynect api")
-updater.login()
-print("Delete existing txt record if any")
-updater.deleteValidationRecord()
-print("Add new validation as txt record")
-updater.addValidationRecord()
-print("Publish modified records")
-updater.publish()
-print("Logout again")
-updater.logout()
+
+if arguments.command is "auth":
+    # update
+    updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
+    print("Login to dynect api")
+    updater.login()
+    print("Add new validation as txt record")
+    updater.addValidationRecord()
+    print("Publish modified records")
+    updater.publish()
+    print("Logout again")
+    updater.logout()
+elif arguments.command is "cleanup":
+    updater = LetsencryptDynectUpdater(arguments.domain)
+    print("Login to dynect api")
+    updater.login()
+    print("Delete existing txt record if any")
+    updater.deleteValidationRecord()
+    print("Publish modified records")
+    updater.publish()
+    print("Logout again")
+    updater.logout()
