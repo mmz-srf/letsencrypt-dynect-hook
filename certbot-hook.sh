@@ -5,7 +5,9 @@ function authDynect() {    echo "Adding _acme-challenge entry for ${CERTBOT_DOMA
     return $?
 }
 
-function authLexicon() {    PROVIDER=$1    AUTH=$2
+function authLexicon() {
+    PROVIDER=$1
+    AUTH=$2
 
     echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on ${PROVIDER}"
     lexicon $PROVIDER $AUTH \
@@ -13,7 +15,9 @@ function authLexicon() {    PROVIDER=$1    AUTH=$2
     return $?
 }
 
-function cleanupLexicon() {    PROVIDER=$1    AUTH=$2
+function cleanupLexicon() {
+    PROVIDER=$1
+    AUTH=$2
 
     echo "Deleting _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on ${PROVIDER}"
     lexicon $PROVIDER $AUTH \
@@ -27,14 +31,18 @@ function auth() {
     exitCodeDynect=$?
 
     authLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitCodeNsone=$?    authLexicon "route53" "--auth-username=${AWS_API_USER} --auth-token=${AWS_API_KEY}"    exitCodeRoute53=$?
+    exitCodeNsone=$?
+    authLexicon "route53" "--auth-access-key=${AWS_API_USER} --auth-access-secret=${AWS_API_KEY}"
+    exitCodeRoute53=$?
     sleep 60
 }
 
 
 function cleanup() {
     cleanupLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitCodeNsone=$?    cleanupLexicon "route53" "--auth-username=${AWS_API_USER} --auth-token=${AWS_API_KEY}"    exitCodeRoute53=$?
+    exitCodeNsone=$?
+    cleanupLexicon "route53" "--auth-access-key=${AWS_API_USER} --auth-access-secret=${AWS_API_KEY}"
+    exitCodeRoute53=$?
 }
 
 
