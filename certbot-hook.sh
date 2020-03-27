@@ -1,37 +1,40 @@
 #!/bin/bash
 
-function authDynect() {
-	echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
-    /usr/bin/python3 $(pwd)/update-dynect.py "auth" $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
+function authDynect() {    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
+    /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
     return $?
 }
 
-function authNsone() {
-    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
-    lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
+function authLexicon() {    PROVIDER=$1    AUTH=$2
+
+    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on ${PROVIDER}"
+    lexicon $PROVIDER $AUTH \
     create "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
     return $?
 }
 
-function auth() {
-    authDynect
-    exitCodeDynect=$?
-    authNsone
-    exitCodeNsone=$?
+function cleanupLexicon() {    PROVIDER=$1    AUTH=$2
 
-    sleep 60
-}
-
-cleanupNsone() {
-    echo "Cleaning up _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on nsone"
-	lexicon "nsone" "--auth-token=${NSONE_API_KEY}" \
+    echo "Deleting _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on ${PROVIDER}"
+    lexicon $PROVIDER $AUTH \
     delete "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
     return $?
 }
 
+
+function auth() {
+    authDynect
+    exitCodeDynect=$?
+
+    authLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
+    exitCodeNsone=$?    authLexicon "route53" "--auth-username=${AWS_API_USER} --auth-token=${AWS_API_KEY}"    exitCodeRoute53=$?
+    sleep 60
+}
+
+
 function cleanup() {
-	cleanupNsone
-    exitCodeNsone=$?
+    cleanupLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
+    exitCodeNsone=$?    cleanupLexicon "route53" "--auth-username=${AWS_API_USER} --auth-token=${AWS_API_KEY}"    exitCodeRoute53=$?
 }
 
 

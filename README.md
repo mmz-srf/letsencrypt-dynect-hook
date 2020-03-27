@@ -22,6 +22,8 @@ Make sure you have set the following environment variables in a .env file in the
 - CERTBOT_API_KEY=your-dynect-api-key
 - CERTBOT_API_PASS=your-dynect-api-password
 - NSONE_API_KEY=your-nsone-api-key
+- AWS_API_KEY=very-secret-api-user
+- AWS_API_USER=even-more-secret-api-key
 
 
 Then call certbot or certbot-auto
@@ -36,7 +38,3 @@ Then call certbot or certbot-auto
       --manual-public-ip-logging-ok \
       --preferred-challenges dns \
       certonly
-
-
-dig _acme-challenge.bibersch.10vor10.ch TXT @ns1.p23.dynect.net
-dig _acme-challenge.bibersch.10vor10.ch TXT @dns1.p07.nsone.net
