@@ -32,7 +32,7 @@ function auth() {
 
     authLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
     exitCodeNsone=$?
-    authLexicon "route53" "--auth-access-key=${AWS_API_USER} --auth-access-secret=${AWS_API_KEY}"
+    authLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
     exitCodeRoute53=$?
     sleep 60
 }
@@ -41,7 +41,7 @@ function auth() {
 function cleanup() {
     cleanupLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
     exitCodeNsone=$?
-    cleanupLexicon "route53" "--auth-access-key=${AWS_API_USER} --auth-access-secret=${AWS_API_KEY}"
+    cleanupLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
     exitCodeRoute53=$?
 }
 
