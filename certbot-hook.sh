@@ -2,7 +2,8 @@
 
 function exitIfFailed() {
     exitCode=$1
-    if [ $exitCode > 0 ];
+    if [ $exitCode > 0 ]
+    then
         exit $exitCode
     fi
 }
@@ -68,8 +69,9 @@ CERTBOT_DOMAIN_CLEAN=$(echo -n $CERTBOT_DOMAIN|sed 's/^\*\.//g')
 source .env
 
 HANDLER=$1;
-if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]; then
-  $HANDLER
+if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]
+then
+    $HANDLER
 fi
 
 exit 0
