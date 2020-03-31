@@ -2,10 +2,11 @@
 
 function exitIfFailed() {
     exitCode=$1
+    provider=$2
     if [ $exitCode -ne "0" ]
     then
-        echo "Exit Code ${exitCode} is not good"
-        #exit $exitCode
+        echo "Exit Code ${exitCode} is not good - failed on provider ${provider}"
+        exit $exitCode
     fi
 }
 
@@ -37,13 +38,13 @@ function cleanupLexicon() {
 
 function auth() {
     authDynect
-    exitIfFailed $?
+    exitIfFailed $? "dynect"
     
     authLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitIfFailed $?
+    exitIfFailed $? "nsone"
 
     authLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
-    exitIfFailed $?
+    exitIfFailed $? "route53"
 
     sleep 60
 }
@@ -51,10 +52,10 @@ function auth() {
 
 function cleanup() {
     cleanupLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitIfFailed $?
+    exitIfFailed $? "nsone"
 
     cleanupLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
-    exitIfFailed $?
+    exitIfFailed $? "route53"
 }
 
 
