@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exit 1
-
 function exitIfFailed() {
     exitCode=$1
     if [ $exitCode > 0 ];
