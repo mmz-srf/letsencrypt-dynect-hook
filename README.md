@@ -37,5 +37,5 @@ Then call certbot or certbot-auto
       --manual-auth-hook "/tmp/dynect-test/certbot-hook.sh auth" \
       --manual-cleanup-hook "/tmp/dynect-test/certbot-hook.sh cleanup" \
       --manual-public-ip-logging-ok \
-      --preferred-challenges dns certonly \
+      --preferred-challenges dns \
       certonly
