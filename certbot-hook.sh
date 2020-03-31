@@ -2,6 +2,13 @@
 
 exit 1
 
+function exitIfFailed() {
+    exitCode=$1
+    if [ $exitCode > 0 ];
+        exit $exitCode
+    fi
+}
+
 function authDynect() {    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
     /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
     return $?
@@ -30,21 +37,24 @@ function cleanupLexicon() {
 
 function auth() {
     authDynect
-    exitCodeDynect=$?
-
+    exitIfFailed $?
+    
     authLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitCodeNsone=$?
+    exitIfFailed $?
+
     authLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
-    exitCodeRoute53=$?
+    exitIfFailed $?
+
     sleep 60
 }
 
 
 function cleanup() {
     cleanupLexicon "nsone" "--auth-token=${NSONE_API_KEY}"
-    exitCodeNsone=$?
+    exitIfFailed $?
+
     cleanupLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
-    exitCodeRoute53=$?
+    exitIfFailed $?
 }
 
 
