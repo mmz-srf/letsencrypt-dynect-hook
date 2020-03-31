@@ -4,7 +4,8 @@ function exitIfFailed() {
     exitCode=$1
     if [ $exitCode > 0 ]
     then
-        exit $exitCode
+        echo "Exit Code ${exitCode} is not good"
+        #exit $exitCode
     fi
 }
 
@@ -73,3 +74,5 @@ if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]
 then
     $HANDLER
 fi
+
+exit 0
