@@ -3,6 +3,7 @@ Prerequisites
 
 You need python3 and the argparse, dotenv and dynect modules
 - pip3 install dns-lexicon
+- pip3 install --upgrade boto3
 - pip3 install DynectDNS
 - pip3 install argparse
 - pip3 install python-dotenv
@@ -36,5 +37,5 @@ Then call certbot or certbot-auto
       --manual-auth-hook "/tmp/dynect-test/certbot-hook.sh auth" \
       --manual-cleanup-hook "/tmp/dynect-test/certbot-hook.sh cleanup" \
       --manual-public-ip-logging-ok \
-      --preferred-challenges dns \
+      --preferred-challenges dns certonly \
       certonly
