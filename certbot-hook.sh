@@ -2,7 +2,7 @@
 
 function exitIfFailed() {
     exitCode=$1
-    if [ $exitCode ]
+    if [ $exitCode -ne "0" ]
     then
         echo "Exit Code ${exitCode} is not good"
         #exit $exitCode
