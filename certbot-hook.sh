@@ -73,5 +73,3 @@ if [ -n "$(type -t $HANDLER)" ] && [ "$(type -t $HANDLER)" = function ]
 then
     $HANDLER
 fi
-
-exit 0
