@@ -46,7 +46,7 @@ function auth() {
     authLexicon "route53" "--auth-access-key=${AWS_API_KEY} --auth-access-secret=${AWS_API_SECRET}"
     exitIfFailed $? "route53"
 
-    sleep 60
+    sleep 30
 }
 
 
