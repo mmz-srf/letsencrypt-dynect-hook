@@ -21,11 +21,12 @@ function authDynect() {
 # AWS Plugin
 function authAws() {
     echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on AWS"
-    /usr/bin/python3 $(pwd)/update-aws.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
+    /usr/bin/python3 $(pwd)/update-aws.py auth $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
 }
 
 function cleanupAws() {
     echo "Deleting _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on AWS"
+    /usr/bin/python3 $(pwd)/update-aws.py cleanup $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
 }
 
 
