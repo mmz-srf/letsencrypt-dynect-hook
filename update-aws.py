@@ -1,5 +1,6 @@
 import boto3
 import argparse
+import sys
 
 
 class LetsencryptAwsUpdater():
@@ -14,7 +15,7 @@ class LetsencryptAwsUpdater():
         self.validation = validation
 
 
-    def auth(self):
+    def _perform(self, action: str):
         zoneId = self._findZoneIdForDomain(self.domain)
         print(zoneId)
         print("{0}.{1}".format(self.acmeDomainPrefix, self.domain))
@@ -26,7 +27,7 @@ class LetsencryptAwsUpdater():
                 'Comment': 'certbot-dns-route53 certificate validation auth',
                 'Changes': [
                     {
-                     'Action': 'UPSERT',
+                     'Action': action,
                      'ResourceRecordSet': {
                          'Name': "{0}.{1}".format(self.acmeDomainPrefix, self.domain),
                          'Type': 'TXT',
@@ -37,20 +38,15 @@ class LetsencryptAwsUpdater():
             })
         except Exception as e:
             print(e)
+            sys.exit(1)
 
-
-        pass
+    def auth(self):
+        self._perform('UPSERT')
 
     def cleanup(self):
-        pass
-
-
+        self._perform('DELETE')
 
     def _findZoneIdForDomain(self, domain):
-        """Find the zone id responsible a given FQDN.
-           That is, the id for the zone whose name is the longest parent of the
-           domain.
-        """
         paginator = self.apiClient.get_paginator("list_hosted_zones")
         zones = []
         target_labels = domain.rstrip(".").split(".")
@@ -74,11 +70,6 @@ class LetsencryptAwsUpdater():
         # And then we choose the first one, which will be the most specific.
         zones.sort(key=lambda z: len(z[0]), reverse=True)
         return zones[0][1]
-
-
-
-
-
 
 
 parser = argparse.ArgumentParser()
@@ -106,3 +97,5 @@ if arguments.action == 'auth':
     updater.auth()
 elif arguments.action == 'cleanup':
     updater.cleanup()
+
+sys.exit(0)
