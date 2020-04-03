@@ -53,10 +53,10 @@ function cleanupNsone() {
 
 
 function auth() {
-    #authDynect
+    authDynect
     exitIfFailed $? "dynect"
     
-    #authNsone
+    authNsone
     exitIfFailed $? "nsone"
 
     authAws
@@ -67,7 +67,7 @@ function auth() {
 
 
 function cleanup() {
-    #cleanupNsone
+    cleanupNsone
     exitIfFailed $? "nsone"
 
     cleanupAws
