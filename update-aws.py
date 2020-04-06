@@ -17,8 +17,6 @@ class LetsencryptAwsUpdater():
 
     def _perform(self, action: str):
         zoneId = self._findZoneIdForDomain(self.domain)
-        print(zoneId)
-        print("{0}.{1}".format(self.acmeDomainPrefix, self.domain))
         # do the actual change
         try:
             response = self.apiClient.change_resource_record_sets(
