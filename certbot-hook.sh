@@ -32,9 +32,6 @@ function cleanupAws() {
 
 # NSONE Plugin
 function authNsone() {
-    PROVIDER=$1
-    AUTH=$2
-
     echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on NSONE"
     lexicon nsone --auth-token=${NSONE_API_KEY} \
     create "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
@@ -42,9 +39,6 @@ function authNsone() {
 }
 
 function cleanupNsone() {
-    PROVIDER=$1
-    AUTH=$2
-
     echo "Deleting _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on NSONE"
     lexicon nsone --auth-token=${NSONE_API_KEY} \
     delete "${CERTBOT_DOMAIN_CLEAN}" TXT --name "_acme-challenge.${CERTBOT_DOMAIN_CLEAN}" --content "${CERTBOT_VALIDATION}"
