@@ -53,24 +53,24 @@ function cleanupNsone() {
 
 
 function auth() {
+    authAws
+    exitIfFailed $? "route53"
+
     authDynect
     
     authNsone
     exitIfFailed $? "nsone"
-
-    authAws
-    exitIfFailed $? "route53"
 
     sleep 120
 }
 
 
 function cleanup() {
-    cleanupNsone
-    exitIfFailed $? "nsone"
-
     cleanupAws
     exitIfFailed $? "route53"
+
+    cleanupNsone
+    exitIfFailed $? "nsone"
 }
 
 
