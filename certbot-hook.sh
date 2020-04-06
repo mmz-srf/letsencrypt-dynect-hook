@@ -61,7 +61,7 @@ function auth() {
     authNsone
     exitIfFailed $? "nsone"
 
-    sleep 120
+    sleep 60
 }
 
 
