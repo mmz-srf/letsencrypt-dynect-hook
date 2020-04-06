@@ -54,7 +54,6 @@ function cleanupNsone() {
 
 function auth() {
     authDynect
-    exitIfFailed $? "dynect"
     
     authNsone
     exitIfFailed $? "nsone"
