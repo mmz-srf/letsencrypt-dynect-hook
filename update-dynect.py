@@ -11,6 +11,11 @@ load_dotenv()
 
 from dynect.DynectDNS import DynectRest
 
+DEBUG = False
+
+def log(s):
+    if DEBUG:
+        print(s)
 
 class LetsencryptDynectUpdater (object):
 
@@ -60,8 +65,6 @@ class LetsencryptDynectUpdater (object):
         records = response['data']
         for record in records:
             record_id = record.split('/').pop()
-            print(record_id)
-            print(record)
         return True
 
     def addValidationRecord(self):
@@ -110,13 +113,13 @@ arguments = parser.parse_args()
 
 # update
 updater = LetsencryptDynectUpdater(arguments.domain, arguments.validation)
-print("Login to dynect api")
+log("Login to dynect api")
 updater.login()
-print("Delete existing txt record if any")
+log("Delete existing txt record if any")
 updater.deleteValidationRecord()
-print("Add new validation as txt record")
+log("Add new validation as txt record")
 updater.addValidationRecord()
-print("Publish modified records")
+log("Publish modified records")
 updater.publish()
-print("Logout again")
+log("Logout again")
 updater.logout()
