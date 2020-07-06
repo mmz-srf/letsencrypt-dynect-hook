@@ -11,13 +11,6 @@ function exitIfFailed() {
     fi
 }
 
-# DYNECT Plugin
-function authDynect() {
-    echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on dynect"
-    /usr/bin/python3 $(pwd)/update-dynect.py $CERTBOT_DOMAIN_CLEAN $CERTBOT_VALIDATION
-    return $?
-}
-
 # AWS Plugin
 function authAws() {
     echo "Adding _acme-challenge entry for ${CERTBOT_DOMAIN_CLEAN} on AWS"
@@ -48,10 +41,7 @@ function cleanupNsone() {
 
 function auth() {
     authAws
-    exitIfFailed $? "route53"
-
-    authDynect
-    
+    exitIfFailed $? "route53"  
     authNsone
     exitIfFailed $? "nsone"
 
